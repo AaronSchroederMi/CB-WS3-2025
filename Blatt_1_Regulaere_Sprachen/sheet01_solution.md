@@ -189,6 +189,8 @@ Entwickeln Sie einen DFA, der nur Wörter über
 $`\Sigma = \lbrace 1,2,3 \rbrace`$ akzeptiert, deren zweitletztes
 Zeichen dasselbe ist wie das zweite.
 
+> Siehe PDF
+
 ## A1.6: Sprache einer regulären Grammatik (2P)
 
 Welche Sprache generiert die folgende Grammatik?
