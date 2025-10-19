@@ -94,7 +94,7 @@ Java.
 
 > Java Bsp: 3F, .4d, +.7, .6, 7.f, .3e-5
 
-> Python:
+> Python: Siehe PDF
 
 Erstellen Sie für jede der beiden Programmiersprachen reguläre
 Ausdrücke, DFAs und reguläre Grammatiken wie in Aufgabe A1.2.
