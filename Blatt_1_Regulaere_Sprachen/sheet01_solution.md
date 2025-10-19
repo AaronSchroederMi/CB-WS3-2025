@@ -150,7 +150,7 @@ Mailadressen?
 $`(a-z)^+@(a-z).(a-z)`$
 
 > Antwort: Allgemein passt der Regex nicht zu der Form die E-Mails annehmen
-> - z.b. kann eine E-Mail durchaus Zahlen vor dem Komma haben  
+> - z.b. kann eine E-Mail durchaus Zahlen vor dem "@" haben  
 > - z.b. können Sonderzeichen sowohl vor wie, auch nach dem Komma auftreten  
 > - z.b. wird nur ein Zeichen nach dem '@' und dem '.' jeweils zugelassen   
 > - etc
