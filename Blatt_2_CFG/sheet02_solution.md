@@ -4,9 +4,9 @@
 
 Erstellen Sie einen deterministischen PDA, der die Sprache
 
-``` math
+$$
 L = \lbrace w \in \lbrace a, b, c \rbrace^* \; | \; w \; \text{hat doppelt so viele a's wie c's} \rbrace
-```
+$$
 
 akzeptiert.
 
@@ -50,6 +50,8 @@ und *bccac* abarbeitet.
 
 Ist der folgenden PDA deterministisch? Warum (nicht)?
 
+> Antwort: Nein, in q_3 gibt es auf den input "d" zwei Stack operationen
+
 $`q_4`$ sei der akzeptierende Zustand.
 
 $$
@@ -70,24 +72,28 @@ $$
 Zeichnen Sie den Automaten. Geben Sie das 7-Tupel des PDa an. Welche
 Sprache akzeptiert er?
 
+[![](https://mermaid.ink/img/pako:eNqN00tu2zAQANCrDCZIV5IjkrIlcFHEboFu0k27KwgUtElZQvQrRaFJHF-g9-gRco7cISepqJ_RBjGqjTTkmxG_B9xVSiPHvZF1CjdfRAlweQlfrTQW3sGnSubQ2Ps8K_fg-ty3hh_fA0iyPOcXSaK6x2usqW41v1CMjd_-z0zZlNP6zqV1CdcHaFJZaw67zOw8yOVW5xwEdn0Cj4MiZxSZFT2j6KzYGcVGNcjwJNU291_pUCDMfFgdqxtRjjMD338Pjy6QHrz8-g1XsO5eY8PahWsXPLqZvk7aDmYzGTIZ4sxENo5s3ia7gTw_jYROhP4nGQajhsHMhk2GzWWen4ZZCnFi4WkxT_CvWuqflegLT1miRK87gplCbk2rPSy0KaQL8dD3o011oQW6_VA6kW1uBYry2KXVsvxWVcWUaap2nyJPZN50UVurbqs-ZrI738XcanSptPlQtaVFzkIW9lWQH_AOOWHRYhmGNKZsSYMViT28R-7TBQlYEEU0JFEU0_jo4UP_W7IIVjRihK5WASURjZceapXZynwerlZ_w45_AEUPC1g?type=png)](https://mermaid.live/edit#pako:eNqN00tu2zAQANCrDCZIV5IjkrIlcFHEboFu0k27KwgUtElZQvQrRaFJHF-g9-gRco7cISepqJ_RBjGqjTTkmxG_B9xVSiPHvZF1CjdfRAlweQlfrTQW3sGnSubQ2Ps8K_fg-ty3hh_fA0iyPOcXSaK6x2usqW41v1CMjd_-z0zZlNP6zqV1CdcHaFJZaw67zOw8yOVW5xwEdn0Cj4MiZxSZFT2j6KzYGcVGNcjwJNU291_pUCDMfFgdqxtRjjMD338Pjy6QHrz8-g1XsO5eY8PahWsXPLqZvk7aDmYzGTIZ4sxENo5s3ia7gTw_jYROhP4nGQajhsHMhk2GzWWen4ZZCnFi4WkxT_CvWuqflegLT1miRK87gplCbk2rPSy0KaQL8dD3o011oQW6_VA6kW1uBYry2KXVsvxWVcWUaap2nyJPZN50UVurbqs-ZrI738XcanSptPlQtaVFzkIW9lWQH_AOOWHRYhmGNKZsSYMViT28R-7TBQlYEEU0JFEU0_jo4UP_W7IIVjRihK5WASURjZceapXZynwerlZ_w45_AEUPC1g)
+
+> $`L = \{w \in \{a, b, c, d\} | \; w = (a)^n(b)^m(c)^m(d)^*, n > 0, m ≥ 0\}`$
+
 ## A2.3: Kontextfreie Sprache (2P)
 
 Welche Sprache generiert die folgende kontextfreie (Teil-) Grammatik?
 
-``` math
+$$
 G = (\lbrace \text{Statement}, \text{Condition}, \ldots \rbrace, \lbrace \text{"if"}, \text{"else"}, \ldots \rbrace, P, \text{Statement})
-```
+$$
 
 mit
 
-``` math
+$$
 \begin{eqnarray}
 P = \lbrace &&                                                                                                           \nonumber \\
 &\text{Statement}& \rightarrow \text{"if" Condition Statement} \; | \; \text{"if" Condition Statement "else" Statement}  \nonumber \\
 &\text{Condition}& \rightarrow \ldots                                                                                    \nonumber \\
 \rbrace                                                                                                                  \nonumber
 \end{eqnarray}
-```
+$$
 
 Ist die Grammatik mehrdeutig? Warum (nicht)?
 
@@ -95,17 +101,9 @@ Ist die Grammatik mehrdeutig? Warum (nicht)?
 
 Entwickeln Sie eine kontextfreie Grammatik für die Sprache
 
-``` math
+$$
 L = \lbrace a^ib^jc^k \; | \; i = j \lor j = k \rbrace
-```
+$$
 
 Zeigen Sie, dass die Grammatik mehrdeutig ist. Entwickeln Sie einen PDA
 für diese Sprache.
-
-------------------------------------------------------------------------
-
-<img src="https://licensebuttons.net/l/by-sa/4.0/88x31.png" width="10%">
-
-Unless otherwise noted, this work is licensed under CC BY-SA 4.0.
-
-<blockquote><p><sup><sub><strong>Last modified:</strong> 102c219 (homework: finalize B02 (#374), 2025-10-03)<br></sub></sup></p></blockquote>
