@@ -115,5 +115,20 @@ $$
 L = \lbrace a^ib^jc^k \; | \; i = j \lor j = k \rbrace
 $$
 
+> $`G = \{\{A, B, C, D, E\}, \{a, b, c\}, P, S\}`$  
+> 
+> $`P = \{`$  
+> S $`\rightarrow`$ AC | B  
+> A $`\rightarrow`$ aAb | E  
+> B $`\rightarrow`$  aB | D  
+> C $`\rightarrow`$  cC | E  
+> D $`\rightarrow`$ bDc | E  
+> E $`\rightarrow \; \epsilon`$  
+> $`\}`$
+
 Zeigen Sie, dass die Grammatik mehrdeutig ist. Entwickeln Sie einen PDA
 für diese Sprache.
+
+> Mehrdeutigkeit... Ja siehe "" und "" bzw. wenn $`i = j = k`$
+
+[![](https://mermaid.ink/img/pako:eNqVlMuOmzAUhl_FOtF0RVICBIIrVQ2XdNNuyq5i48QmoHITGHWmSTZ9kb5bn6TGOCVBYqqyQMfH339uBp_hWFEGGE4NqVP06UtcIvT0hCJOGo7eoI8VyVHLX_KsPKF-r7cZilCS5TleJAkVj9bypvrG8IKaprKX3zPKU2zUz70o-nBGbUpqhtExa44aysmB5RjFEMVw7YndLLFThDdLeIrwZwlfEcEsESginCVCRexnib0iIl7VI0QP-XLatABiQBIe581ZK9VouXyPLr25cC33nYZ-__qJ3sp377zs4lJOTHCz5J3PEx5PCv1RqGTkJvGUhijeu2UaCnylJgl6Q2TvXyVdghGcljCJFQzIK435wuNLyX6Q7G_pp6KLPJIB8tEMEg774X8E6c3DMDFJ3085HJHjtMXwoUUVZUB8xRxUf_792PYPMf2HtGIGoIm_OKOAedMxDQrWFKRfwlmeI_CUFSyG_gukLCFdzmOIy6uQ1aT8WlXFTdlU3SkFnJC8FauupuLbDDIirojir7dhJWWNX3UlB2xZlimjAD7DM2BDX690c-vYruFatuPYGw1eAK9da2VvNoZh2ZZjrg3duGrwQybWV1vDcFzH0u2tsXUtXcRjNONV83m4n-Q1df0DRkpsJw?type=png)](https://mermaid.live/edit#pako:eNqVlMuOmzAUhl_FOtF0RVICBIIrVQ2XdNNuyq5i48QmoHITGHWmSTZ9kb5bn6TGOCVBYqqyQMfH339uBp_hWFEGGE4NqVP06UtcIvT0hCJOGo7eoI8VyVHLX_KsPKF-r7cZilCS5TleJAkVj9bypvrG8IKaprKX3zPKU2zUz70o-nBGbUpqhtExa44aysmB5RjFEMVw7YndLLFThDdLeIrwZwlfEcEsESginCVCRexnib0iIl7VI0QP-XLatABiQBIe581ZK9VouXyPLr25cC33nYZ-__qJ3sp377zs4lJOTHCz5J3PEx5PCv1RqGTkJvGUhijeu2UaCnylJgl6Q2TvXyVdghGcljCJFQzIK435wuNLyX6Q7G_pp6KLPJIB8tEMEg774X8E6c3DMDFJ3085HJHjtMXwoUUVZUB8xRxUf_792PYPMf2HtGIGoIm_OKOAedMxDQrWFKRfwlmeI_CUFSyG_gukLCFdzmOIy6uQ1aT8WlXFTdlU3SkFnJC8FauupuLbDDIirojir7dhJWWNX3UlB2xZlimjAD7DM2BDX690c-vYruFatuPYGw1eAK9da2VvNoZh2ZZjrg3duGrwQybWV1vDcFzH0u2tsXUtXcRjNONV83m4n-Q1df0DRkpsJw)
