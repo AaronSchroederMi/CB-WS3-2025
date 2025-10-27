@@ -95,7 +95,17 @@ P = \lbrace &&                                                                  
 \end{eqnarray}
 $$
 
+> Die Sprache beschreibt if Statements die in einander ge-nested werden können. Auch kann den if Statements jeweils else Statements angehängt werden  
+> - Bsp.: "if" [Condition] Statement
+> - Bsp.: "if" [Condition] Statement "else" Statement
+> - Bsp.: "if" [Condition] "if" [Condition] Statement "else" Statement
+
 Ist die Grammatik mehrdeutig? Warum (nicht)?
+
+> Ja diese Sprache ist mehrdeutig, siehe Beispiel:  
+> `"if" [Condition] "if" [Condition] Statement "else" Statement`
+>
+[![](https://mermaid.ink/img/pako:eNp1k01rhDAQhv-KzNld8m02h1LYXnvqrQgl1uyuoMnWRmgr_vdmt1ohmFt8xnkmvjgjvLvagIJzr6-X0mbZxxvS2W73EA5YR4DEgM6ALoDFgMdAxKCIgQxgmfM4troyrcpevPamM9ZPfyW8lprTzMjKjs7WjW-cnRZ50sQ2TDxtEmlTsZZM-2lmKrcb5i-slqyrCJAY0BnQBbAY8BiI2FHEQFbrTdJZVxtZV-ms0ya2YeJpk0ibimoz6-0GyMP_3dSgfD-YHDrTd_r2COOtrQR_CW-WoMKxNic9tL6E0k6h7artq3Pd0tm74XwBddJhZA7DtQ4znhodlqf7p72xtemPbrAeFMGFvFtAjfAFCnO-55QhTqTE6CAKmsM3KIbRPrADRYxixBFhUw4_98FoL6Q4CIaFZIgIQXIwISTXP_8t7n1_p18s1TTu?type=png)](https://mermaid.live/edit#pako:eNp1k01rhDAQhv-KzNld8m02h1LYXnvqrQgl1uyuoMnWRmgr_vdmt1ohmFt8xnkmvjgjvLvagIJzr6-X0mbZxxvS2W73EA5YR4DEgM6ALoDFgMdAxKCIgQxgmfM4troyrcpevPamM9ZPfyW8lprTzMjKjs7WjW-cnRZ50sQ2TDxtEmlTsZZM-2lmKrcb5i-slqyrCJAY0BnQBbAY8BiI2FHEQFbrTdJZVxtZV-ms0ya2YeJpk0ibimoz6-0GyMP_3dSgfD-YHDrTd_r2COOtrQR_CW-WoMKxNic9tL6E0k6h7artq3Pd0tm74XwBddJhZA7DtQ4znhodlqf7p72xtemPbrAeFMGFvFtAjfAFCnO-55QhTqTE6CAKmsM3KIbRPrADRYxixBFhUw4_98FoL6Q4CIaFZIgIQXIwISTXP_8t7n1_p18s1TTu)
 
 ## A2.4: Kontextfreie Grammatik (3P)
 
