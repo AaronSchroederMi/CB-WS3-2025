@@ -11,12 +11,12 @@ $$
 akzeptiert.
 
 > DPDA: $`P = (Q, \Sigma, \Gamma, \delta, q_0, \perp, F)`$  
-> $`Q = \{q_0, Stop\}`$  
+> $`Q = \{q_0, q_1\}`$  
 > $`\Sigma = \{ a, b, c\}`$  
 > $`\Gamma = \{A, B, C\}`$  
 > $`\delta = ...`$ <-- Siehe Abb.  
 > $`q_0 = q_0`$  
-> $`F = \{Stop\}`$  
+> $`F = \{q_1\}`$  
 
 [![](https://mermaid.ink/img/pako:eNptUl1PgzAU_SvNXeYTm5QNGDUxwkx80Rd9MySmW8sg8mUpcRP34h_xv_lLbFnZFiMJ5Jx7zzm3wO1gXTEOBDaC1im6f4xLhMZj9CSpkOgC3VU0R43c5Vm5QbqnMUdvLzZKsjwnoyRh6rIaKapXTkZsNjN48p4xmRKn3mqbMtx0qElpzQliq3yyzsR6f-jgU-dYPR1D8iYujRBNJtfoU5NRMA-uLPTz_YUu9VPXPvWUQWuftOtBF4ZGufrjpAOPhig17J-pKinsc0LDIs1MYniGdT0yeKnw0kyJzrCuR0sTpEn_TqYZnvPTaeISLPWrMgZEipZbUHBRUE2h6_sgU17wGIiCjCe0zWUMcblXtpqWz1VVDE5RtZsUSELzRrG2ZupL32ZU7UFxrApeMi6WVVtKIN7c7UOAdLAF4vveFGMncD08WwS27VmwA-I4ztRfzH0Xuz72fHXvLfjox9pT15kFeOHP_cDGAfZUHGeZrMTDYQX7Tdz_AmrFxQk?type=png)](https://mermaid.live/edit#pako:eNptUl1PgzAU_SvNXeYTm5QNGDUxwkx80Rd9MySmW8sg8mUpcRP34h_xv_lLbFnZFiMJ5Jx7zzm3wO1gXTEOBDaC1im6f4xLhMZj9CSpkOgC3VU0R43c5Vm5QbqnMUdvLzZKsjwnoyRh6rIaKapXTkZsNjN48p4xmRKn3mqbMtx0qElpzQliq3yyzsR6f-jgU-dYPR1D8iYujRBNJtfoU5NRMA-uLPTz_YUu9VPXPvWUQWuftOtBF4ZGufrjpAOPhig17J-pKinsc0LDIs1MYniGdT0yeKnw0kyJzrCuR0sTpEn_TqYZnvPTaeISLPWrMgZEipZbUHBRUE2h6_sgU17wGIiCjCe0zWUMcblXtpqWz1VVDE5RtZsUSELzRrG2ZupL32ZU7UFxrApeMi6WVVtKIN7c7UOAdLAF4vveFGMncD08WwS27VmwA-I4ztRfzH0Xuz72fHXvLfjox9pT15kFeOHP_cDGAfZUHGeZrMTDYQX7Tdz_AmrFxQk)
 
