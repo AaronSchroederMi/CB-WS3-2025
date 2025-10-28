@@ -44,7 +44,7 @@ und *bccac* abarbeitet.
 > Kann nicht zu endknoten wechseln (Stack nicht leer)
 > ```
 
-> Anmerkung: Ich Habe die vermutung das ein DPDA hier nicht möglich ist
+> Anmerkung: Ich Habe die vermutung das ein DPDA hier nicht möglich ist (proved wrong)
 
 ## A2.2: Akzeptierte Sprache (2P)
 
