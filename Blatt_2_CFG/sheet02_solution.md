@@ -74,7 +74,7 @@ Sprache akzeptiert er?
 
 [![](https://mermaid.ink/img/pako:eNqN00tu2zAQANCrDCZIV5IjkrIlcFHEboFu0k27KwgUtElZQvQrRaFJHF-g9-gRco7cISepqJ_RBjGqjTTkmxG_B9xVSiPHvZF1CjdfRAlweQlfrTQW3sGnSubQ2Ps8K_fg-ty3hh_fA0iyPOcXSaK6x2usqW41v1CMjd_-z0zZlNP6zqV1CdcHaFJZaw67zOw8yOVW5xwEdn0Cj4MiZxSZFT2j6KzYGcVGNcjwJNU291_pUCDMfFgdqxtRjjMD338Pjy6QHrz8-g1XsO5eY8PahWsXPLqZvk7aDmYzGTIZ4sxENo5s3ia7gTw_jYROhP4nGQajhsHMhk2GzWWen4ZZCnFi4WkxT_CvWuqflegLT1miRK87gplCbk2rPSy0KaQL8dD3o011oQW6_VA6kW1uBYry2KXVsvxWVcWUaap2nyJPZN50UVurbqs-ZrI738XcanSptPlQtaVFzkIW9lWQH_AOOWHRYhmGNKZsSYMViT28R-7TBQlYEEU0JFEU0_jo4UP_W7IIVjRihK5WASURjZceapXZynwerlZ_w45_AEUPC1g?type=png)](https://mermaid.live/edit#pako:eNqN00tu2zAQANCrDCZIV5IjkrIlcFHEboFu0k27KwgUtElZQvQrRaFJHF-g9-gRco7cISepqJ_RBjGqjTTkmxG_B9xVSiPHvZF1CjdfRAlweQlfrTQW3sGnSubQ2Ps8K_fg-ty3hh_fA0iyPOcXSaK6x2usqW41v1CMjd_-z0zZlNP6zqV1CdcHaFJZaw67zOw8yOVW5xwEdn0Cj4MiZxSZFT2j6KzYGcVGNcjwJNU291_pUCDMfFgdqxtRjjMD338Pjy6QHrz8-g1XsO5eY8PahWsXPLqZvk7aDmYzGTIZ4sxENo5s3ia7gTw_jYROhP4nGQajhsHMhk2GzWWen4ZZCnFi4WkxT_CvWuqflegLT1miRK87gplCbk2rPSy0KaQL8dD3o011oQW6_VA6kW1uBYry2KXVsvxWVcWUaap2nyJPZN50UVurbqs-ZrI738XcanSptPlQtaVFzkIW9lWQH_AOOWHRYhmGNKZsSYMViT28R-7TBQlYEEU0JFEU0_jo4UP_W7IIVjRihK5WASURjZceapXZynwerlZ_w45_AEUPC1g)
 
-> $`L = \{w \in \{a, b, c, d\} | \; w = (a)^n(b)^m(c)^m(d)^+, n > 0, m ≥ 0\}`$
+> $`L = \{w \in \{a, b, c, d\} | \; w = (a)^n(b)^m(c)^m(d)^o, n > 0, m > 0, o >= n\}`$
 
 ## A2.3: Kontextfreie Sprache (2P)
 
