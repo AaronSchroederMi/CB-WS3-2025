@@ -294,6 +294,8 @@ Written”](https://journal.stuffwithstuff.com/2015/09/08/the-hardest-program-iv
 von Bob Nystrom ([Nystrom 2015](#ref-Nystrom2015)) gut geschriebene
 Beiträge, um tiefer in die Materie einzusteigen.
 
+> Solution: [Implementation](https://github.com/AaronSchroederMi/CB-WS3-2025-3-Starter-Projekt/blob/master/src/main/java/PrettyPrinter.java)
+
 ### A3.3: AST (3P)
 
 Beim Parsen bekommen Sie von ANTLR einen Parse-Tree zurück, der direkt
