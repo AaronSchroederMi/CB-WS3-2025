@@ -4,22 +4,22 @@ grammar A31;
 // EOF -> Stands for "End of line"
 start : (stmt | NEWLINE)* EOF ;
 
-stmt  : ID ':=' expr NEWLINE | condition;
+stmt  : (ID ':=')? expr NEWLINE | condition;
 
-expr : value ((arithmeticOp|comparisonOp) value)? ;
+expr : value ((arithmeticOp|comparisonOp) value)* ;
 
-condition : 'while' expr 'do' NEWLINE stmt* 'end' NEWLINE | 'if' expr 'do' NEWLINE stmt* ('else do' NEWLINE stmt*)? 'end' NEWLINE ;
+condition : 'while' expr 'do' NEWLINE stmt* 'end' NEWLINE | 'if' expr 'do' NEWLINE stmt* ('else' 'do' NEWLINE stmt*)? 'end' NEWLINE ;
 
 // No priority changes for alternatives at the same level
 
-arithmeticOp : ('*'|'/')
-             | ('+'|'-')
+arithmeticOp : ('*'|'/')        # POINTCALC
+             | ('+'|'-')        # LINECALC
              ;
 
-comparisonOp : '=='
-             | '!='
-             | '>' '='?
-             | '<' '='?
+comparisonOp : '=='     # EQUAL
+             | '!='     # NOTEQUAL
+             | '>' '='?     # GREATEREQ
+             | '<' '='?     # SMALLEREQ
              ;
 
 value : NUM | ID | STRING;
