@@ -296,6 +296,64 @@ Beiträge, um tiefer in die Materie einzusteigen.
 
 > Solution: [Implementation](https://github.com/AaronSchroederMi/CB-WS3-2025-3-Starter-Projekt/blob/master/src/main/java/PrettyPrinter.java)
 
+```Java
+private static void prettyPrint(ParseTree tree, Blatt3GrammatikParser parser, int level) {
+    //each statement has at least its own line
+    if (tree.toStringTree(parser).startsWith("(statement")) {
+       IO.println();
+    }
+
+    //handles while loop indentation
+    if (tree.getParent() != null && tree.getParent().toStringTree(parser).startsWith("(loop")) {
+        if (!tree.toStringTree(parser).equals("while")
+            & !tree.toStringTree(parser).startsWith("(condition")
+            & !tree.toStringTree(parser).equals("do")
+            & !tree.toStringTree(parser).equals("end")) {
+            IO.print("   ".repeat(level));
+        }
+        if (tree.toStringTree(parser).equals("end")) {
+            IO.println();
+            IO.print("   ".repeat(level));
+        }
+    }
+
+    //handles if-Statement indentation
+    if (tree.getParent() != null && tree.getParent().toStringTree(parser).startsWith("(conditional")) {
+        if (!tree.toStringTree(parser).equals("if")
+            & !tree.toStringTree(parser).startsWith("(condition")
+            & !tree.toStringTree(parser).equals("do")
+            & !tree.toStringTree(parser).equals("end")
+            & !tree.toStringTree(parser).equals("else do")) {
+            IO.print("   ".repeat(level));
+        }
+        if (tree.toStringTree(parser).equals("end")) {
+            IO.println();
+            IO.print("   ".repeat(level));
+        }
+        if (tree.toStringTree(parser).equals("else do")) {
+            IO.println();
+            IO.print("   ".repeat(level - 1));
+        }
+    }
+
+    //each token is seperated by whitespace
+    if (tree.getChildCount() == 0) {
+        IO.print(tree.toStringTree() + " ");
+    }
+
+    //traverses entire tree
+    for (int i = 0; i < tree.getChildCount(); i++) {
+        if (tree.getChild(i).toStringTree(parser).equals("do")) {
+            level++;
+        }
+        if (tree.getChild(i).toStringTree(parser).equals("end")) {
+            level--;
+        }
+        prettyPrint(tree.getChild(i), parser, level);
+    }
+}
+```
+
 ### A3.3: AST (3P)
 
 Beim Parsen bekommen Sie von ANTLR einen Parse-Tree zurück, der direkt
