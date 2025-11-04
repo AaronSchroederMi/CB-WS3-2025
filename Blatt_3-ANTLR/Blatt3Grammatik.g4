@@ -26,7 +26,7 @@ condition   : condition '==' condition
             | condition '!=' condition
             | condition '>' condition
             | condition '<' condition
-            | term | STRING
+            | term
             ;
 
 conditional : 'if' condition 'do' statement* 'end'
@@ -36,7 +36,7 @@ conditional : 'if' condition 'do' statement* 'end'
 loop        : 'while' condition 'do' statement* 'end'
             ;
 
-term        : NUMBER | ID ;
+term        : NUMBER | ID | STRING ;
 
 
 //Lexer

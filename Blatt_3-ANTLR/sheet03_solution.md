@@ -313,3 +313,35 @@ Pattern-Matching in Java 25) erreichen.
 Passen Sie den Pretty-Printer so an, dass er auch den AST ausgeben kann.
 (Alternativ können auch einen zweiten Pretty-Printer für den AST
 implementieren.)
+
+> Solution: [Implementation](https://github.com/AaronSchroederMi/CB-WS3-2025-3-Starter-Projekt/blob/master/src/main/java/PrettyPrinter.java)
+
+```Java
+private static void printAST(ParseTree tree, int indent) {
+    String rule = tree.getClass().getSimpleName().replace("Context", "");
+    String pad = "   ".repeat(indent);
+    if (rule.equals("Conditional")) {
+        rule = "if";
+        if (tree.getText().contains("else")) rule = "if-else";
+    }
+    if (!rule.equals("Term") 
+            & !rule.equals("Statement")
+            & !rule.equals("Arithmetic")
+            & !rule.equals("Condition")) {
+        System.out.println(pad + rule);
+    }
+    
+    for (int i = 0; i < tree.getChildCount(); i++) {
+        ParseTree child = tree.getChild(i);
+        if (!(child instanceof TerminalNode)) {
+            printAST(child, indent + 1);
+        } else if (!child.getText().equals("do") 
+                & !child.getText().equals("end") 
+                & !child.getText().equals(":=") 
+                & !child.getText().equals("if") 
+                & !child.getText().equals("else do")) {
+            System.out.println(pad + "   " + child.getText());
+        }
+    }
+}
+```
