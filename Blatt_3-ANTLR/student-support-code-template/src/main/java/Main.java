@@ -1,42 +1,25 @@
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import my.pkg.*;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 public class Main {
   static void main(String... args) throws IOException, URISyntaxException {
-    IO.println("Hello World!");
+    while (true) {
+      // Einlesen über Konsole/Prompt
+      String input = IO.readln("expr?> ");
 
-    // Einlesen über Konsole/Prompt
-    String input = IO.readln("expr?> ");
+      A31Lexer lexer = new A31Lexer(CharStreams.fromString(input + "\n"));
+      CommonTokenStream tokens = new CommonTokenStream(lexer);
+      A31Parser parser = new A31Parser(tokens);
 
-    HelloLexer lexer = new HelloLexer(CharStreams.fromString(input));
-    CommonTokenStream tokens = new CommonTokenStream(lexer);
-    HelloParser parser = new HelloParser(tokens);
-
-    ParseTree tree = parser.start(); // Start-Regel
-    IO.println(tree.toStringTree(parser));
-
-    // Einlesen über den Classpath
-    IO.readln("enter?> ");
-    try (InputStream in = Main.class.getResourceAsStream("/cpp/vars.cpp")) {
-      String text = new String(in.readAllBytes(), StandardCharsets.UTF_8);
-      IO.println("\n\n/cpp/vars.cpp");
-      IO.println(text);
+      ParseTree tree = parser.start(); // Start-Regel
+      IO.println(tree.toStringTree(parser));
+      A31VisitorPRP prettyPrinter = new A31VisitorPRP();
+      IO.println(prettyPrinter.visit(tree));
     }
-
-    // Einlesen über Dateisystem
-    IO.readln("enter?> ");
-    URL url = Main.class.getResource("/cpp/expr.cpp");
-    String txt = Files.readString(Path.of(url.toURI()), StandardCharsets.UTF_8);
-    IO.println("\n\n/cpp/expr.cpp");
-    IO.println(txt);
   }
 }
