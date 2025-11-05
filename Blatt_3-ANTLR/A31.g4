@@ -6,18 +6,15 @@ start : (stmt | NEWLINE)* EOF ;
 
 stmt  : (ID ':=')? expr NEWLINE | condition;
 
-expr : value ((arithmeticOp|comparisonOp) value)* ;
+expr : expr ('*'|'/')  expr | expr ('+'|'-')  expr | value ;
 
 condition : 'while' expr 'do' NEWLINE stmt* 'end' NEWLINE | 'if' expr 'do' NEWLINE stmt* ('else' 'do' NEWLINE stmt*)? 'end' NEWLINE ;
 
 // No priority changes for alternatives at the same level
 
-arithmeticOp : value ('*'|'/') value
-             | value ('+'|'-') value
-             | value
-             ;
-
-comparisonOp : '=='     # EQUAL
+arithmeticOp : ('*'|'/')        #MUL
+             | ('+'|'-')        #ADD
+             | '=='     # EQUAL
              | '!='     # NOTEQUAL
              | '>' '='?     # GREATEREQ
              | '<' '='?     # SMALLEREQ  // After this default-case recommended and then nesting with values the operators
