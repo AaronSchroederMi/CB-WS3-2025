@@ -1,0 +1,1 @@
+(defn firstList (list 5 "abc" 10 5 false 0 45))

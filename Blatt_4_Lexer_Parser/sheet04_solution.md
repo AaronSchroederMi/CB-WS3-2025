@@ -304,11 +304,22 @@ Zeigen Sie, dass die Grammatik LL(1) ist.
     reichen. Definieren Sie beispielsweise eine Funktion, die rekursiv
     die Länge einer Liste berechnet.
 
-    Definieren Sie neben gültigen Programmen auch solche, die in der
-    syntaktischen Analyse zurückgewiesen werden sollten. Welche
-    Fehlerkategorien könnte es hier geben?
+> #### [Hello World](Bsp_Programme/bsp1),  
+> #### [print list](Bsp_Programme/bsp2),  
+> #### [bubblesort](Bsp_Programme/bsp3)
+
+Definieren Sie neben gültigen Programmen auch solche, die in der
+syntaktischen Analyse zurückgewiesen werden sollten. Welche
+Fehlerkategorien könnte es hier geben?
+
+> #### [Typo](Bsp_Programme/fail1), <-- an vielen Stellen sind IDs und keywords erlaubt
+> #### [Falscher Operator](Bsp_Programme/fail2),
+> #### [Java Code](Bsp_Programme/fail3),
+> #### [Falscher Typ](Bsp_Programme/fail4)
 
 2.  Definieren Sie nun für die obige Sprache eine geeignete Grammatik.
+
+> #### [lisp artige Sprache](lisp_artige_sprache.g4)
 
 ### A4.3: Lexer (2P)
 
