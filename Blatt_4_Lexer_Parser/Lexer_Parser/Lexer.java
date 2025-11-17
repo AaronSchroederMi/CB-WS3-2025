@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import TokenType.*;
 
 public class Lexer {
     private final List<Token> result = new ArrayList<>();
@@ -7,6 +8,7 @@ public class Lexer {
 
     public List<Token> tokenize(String input) {
         chars = input;
+        IO.println();
         IO.println(chars);
         createTokens();
         return result;
@@ -14,8 +16,13 @@ public class Lexer {
 
     private void createTokens() {
         while (true) {
-            IO.println(result);
             if (chars.isEmpty()) {
+                IO.println();
+                IO.println("Lexer Result:");
+                IO.println("-".repeat(result.toString().length()));
+                IO.println(result);
+                IO.println("-".repeat(result.toString().length()));
+                IO.println();
                 addToken(TokenType.EOF, "");
                 return;
             }

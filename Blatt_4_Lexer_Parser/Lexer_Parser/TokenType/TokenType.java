@@ -1,4 +1,7 @@
+package TokenType;
+
 public enum TokenType {
+    START,
     INTEGER,
     STRING,
     TRUE,
@@ -26,4 +29,12 @@ public enum TokenType {
     EQUAL,
     LESS,
     GREATER,
+
+    EXPRESSION,
+    STATEMENT,
+    ASSIGNMENT,
+    CONDITIONAL,
+    DOBODY,
+    CONDITION,
+    OPERANDEN,
 }

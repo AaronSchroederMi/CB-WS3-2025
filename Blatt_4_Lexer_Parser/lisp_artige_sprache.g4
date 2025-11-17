@@ -19,8 +19,8 @@ expression  : INTEGER
 
 statement   : '(' (arithOp | logicOp | funcOP | ID) (operanden | statement)+ ')'
             | '(' 'list' (expression | statement)* ')'
-            | '(' 'nth' ('(' 'list' expression* ')' | ID) INTEGER ')'
-            | '(' ( 'head' | 'tail' ) ('(' 'list' expression* ')' | ID | statement) ')'
+            | '(' 'nth' ('(' 'list' (expression | statement)* ')' | ID) INTEGER ')'
+            | '(' ( 'head' | 'tail' ) ('(' 'list' (expression | statement)* ')' | ID) ')'
             ;
 
 conditional : '(' 'if' condition (statement | expression | doBody) ')'
@@ -28,7 +28,7 @@ conditional : '(' 'if' condition (statement | expression | doBody) ')'
             ;
 
 assignments : '(' 'def' ID (ID | expression | statement) ')'
-            | '(' 'defn' ID '(' ID ')' elements ')'
+            | '(' 'defn' ID '(' ID ')' elements* ')'
             | '(' 'let' '(' (ID (ID | expression | statement))+ ')' elements ')'
             ;
 

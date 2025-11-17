@@ -8,7 +8,12 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Lexer lexer = new Lexer();
         List<Token> tokens = lexer.tokenize(readFile());
-        tokens.stream().map(Token::value).forEach(z -> System.out.print(z + " "));
+        Parser parser = new Parser();
+        Node tree = parser.createParseTree(tokens);
+
+        tree.printMermaid();
+        tree.printLinear();
+
     }
 
     private static String readFile() throws IOException {
@@ -20,6 +25,7 @@ public class Main {
             IO.println("...no such file");
         }
         IO.println("Reading expr file: " + path);
-        return Files.readString(path, StandardCharsets.UTF_8);
+        String expr = Files.readString(path, StandardCharsets.UTF_8);
+        return expr += "    ";
     }
 }

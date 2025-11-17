@@ -1,6 +1,6 @@
 (defn swap (lst)
     (if (> (head lst) (nth lst 1))
-        (list (nth lst 1) (head lst) (tail (tail lst)))
+        (do (let (t (tail lst)) (list (nth lst 1) (head lst)  (tail t) ) ) )
         lst
     )
 )
