@@ -382,6 +382,23 @@ Recherchieren Sie, welche Open-Source-Projekte auf handgeschriebene
 Gründe es dafür in diesen Projekten gibt. Was spricht aus Ihrer
 persönlichen Sicht für und gegen ANTLR?
 
+> #### Projekte
+> - [Ruff](https://astral.sh/blog/ruff-v0.4.0) (gewechselt von Generator _LALRPOP_)
+>   - Begründung: Leichter instand zuhalten, Performanter
+> - [GCC](https://gcc.gnu.org/wiki/New_C_Parser) (gewechselt von C und Objektive-C)
+>   - Begründung: kleine performance boosts, größere Kontrolle, eigenwilligkeit des Alten Parser
+> - [rust](https://users.rust-lang.org/t/what-type-of-parser-does-the-rust-compiler-use/71430/4)
+>   - Kontrolle über Lookahead, Lesbarkeit
+
+> #### ANTLR
+> 
+>| VORTEILE                       | NACHTEILE                             |
+>|--------------------------------|---------------------------------------|
+>| Schneller Einstieg (kein Code) | Abstrahiertes Verständnis             |
+>| Abstraktere Darstellung        | langsamer als Handgeschriebene Parser |
+>| Direkte Visualisierung         | ANTLR Abhängigkeit und Beschränkungen |
+
+
 ------------------------------------------------------------------------
 
 <img src="https://licensebuttons.net/l/by-sa/4.0/88x31.png" width="10%">
