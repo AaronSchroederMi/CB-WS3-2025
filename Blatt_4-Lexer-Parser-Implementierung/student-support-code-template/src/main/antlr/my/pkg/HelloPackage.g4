@@ -8,27 +8,19 @@ package my.pkg;
 // start : stmt* ;
 start : stmt* EOF ;
 
-stmt : expr ;
+stmt : expr;
 
-expr : atom | ('('('*'|'/'|'+'|'-') (integerExpr|stringExpr)')')+ ;
+// List expressions
+listexpr
+     : listexpr rBracket
+     | '('
+     ;
 
-// Unnecessary precedence
-stringExpr
-          : stringExpr ('*'|'/') STRING
-          | stringExpr ('+'|'-') STRING
-          | stringExpr ('+'|'-'|'/') STRING
-          // Endpoint of the left-recursion / no stringExpr anymore
-          | STRING
-          ;
-
-// Unnecessary precedence
-integerExpr
-           : integerExpr ('*'|'/') INTEGER
-           | integerExpr ('+'|'-') INTEGER
-           | integerExpr ('='|'>'|'<') INTEGER
-           // Endpoint of the left-recursion / no stringExpr anymore
-           | INTEGER
-           ;
+// right bracket for list expressions
+rBracket
+        : ('*'|'/'|'+'|'-'|'='|'>'|'<')
+        | INTEGER* ')'
+        ;
 
 atom
     : INTEGER
