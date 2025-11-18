@@ -11,11 +11,25 @@ public class Parser {
     private Token nextToken;
     private int index = 0;
 
-    public Node createParseTree(List<Token> tokens) {
+    public Node createParseTree(List<Token> tokens, boolean reduceToAST) {
         this.tokens = tokens;
         this.nextToken = tokens.getFirst();
         program();
+        if (reduceToAST) {
+            reduceToAST(root);
+        }
         return root;
+    }
+
+    private void reduceToAST(Node parent) {
+        if (parent.getToken().type().equals(EOF)) {parent.getParent().removeChild(parent);}
+        if (parent.getToken().type().equals(LBRACE)) {parent.getParent().removeChild(parent);}
+        if (parent.getToken().type().equals(RBRACE)) {parent.getParent().removeChild(parent);}
+        if (parent.getToken().type().equals(DO)) {parent.getParent().removeChild(parent);}
+        List<Node> children = new ArrayList<>(parent.getChildren());
+        for (Node child : children) {
+            reduceToAST(child);
+        }
     }
 
     private TokenType peek() {
@@ -37,7 +51,7 @@ public class Parser {
     private Token match(TokenType type) {
         if (peek(type)) return consume();
         handleError(fullPeek());
-        return null; //unreachable
+        return new Token(null, null); //unreachable
     }
 
     private void handleError(Token token) {
@@ -52,7 +66,6 @@ public class Parser {
         }
         root.addChild(new Node(match(EOF)));
     }
-
     private void element() {
         switch (peek()) {
             case INTEGER -> {
@@ -141,7 +154,6 @@ public class Parser {
         current.addChild(new Node(match(RBRACE)));
         current = current.getParent();
     }
-
     private void list() {
         current.addChild(new Node(match(LIST)));
 
@@ -172,7 +184,6 @@ public class Parser {
         }
         current.addChild(new Node(match(RBRACE)));
     }
-
     private void nth() {
         current.addChild(new Node(match(NTH)));
 
@@ -186,7 +197,6 @@ public class Parser {
         current.addChild(new Node(match(RBRACE)));
         current = current.getParent();
     }
-
     private void headTail() {
         switch (peek()) {
             case HEAD -> {
@@ -271,7 +281,6 @@ public class Parser {
         current.addChild(new Node(match(RBRACE)));
         current = current.getParent();
     }
-
     private void condition() {
         current = current.addChild(new Node(new Token(CONDITION, "")));
         current.addChild(new Node(match(LBRACE)));
@@ -305,7 +314,6 @@ public class Parser {
         current = current.getParent();
         current = current.getParent();
     }
-
     private void doBody(Token tmp) {
         current = current.addChild(new Node(new Token(DOBODY, "")));
         current.addChild(new Node(tmp));

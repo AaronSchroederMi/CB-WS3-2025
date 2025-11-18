@@ -3,12 +3,12 @@ import java.util.List;
 import static TokenType.TokenType.*;
 
 public class Node {
-    private Token token;
-    private List<Node> children = new ArrayList<Node>();
+    private final Token token;
+    private final List<Node> children = new ArrayList<>();
     private Node parent;
 
     private static int idCounter = 0;
-    private int id;
+    private final int id;
 
     public Node(Token token) {
         this.token = token;
@@ -26,14 +26,24 @@ public class Node {
         return child;
     }
 
+    public void removeChild(Node child) {
+        child.parent = null;
+        children.remove(child);
+    }
+
     public boolean isLeaf() {
         return children.isEmpty();
     }
 
+    public Token getToken() {
+        return token;
+    }
+
     public void printLinear() {
+        String s = "-".repeat(children.toString().length());
         if (token.type() == START) {
             IO.println("Linear Parse Tree");
-            IO.println("-".repeat(children.toString().length()));
+            IO.println(s);
         }
         IO.print(token);
         if (!isLeaf()) {
@@ -48,16 +58,17 @@ public class Node {
         }
         if (token.type() == START) {
             IO.println();
-            IO.println("-".repeat(children.toString().length()));
+            IO.println(s);
             IO.println();
         }
     }
 
     public void printMermaid() {
         if (isLeaf()) return;
+        String s = "-".repeat(token.toString().length() * 7);
         if (token.type() == START) {
             IO.println("Mermaid Parse Tree");
-            IO.println("-".repeat(token.toString().length() * 7));
+            IO.println(s);
         }
         for (Node child : children) {
             IO.print(id + "[\""+ token.toMermaidSafeString() + "\"]");
@@ -67,7 +78,7 @@ public class Node {
             child.printMermaid();
         }
         if (token.type() == START) {
-            IO.println("-".repeat(token.toString().length() * 7));
+            IO.println(s);
             IO.println();
         }
     }

@@ -369,7 +369,11 @@ Recovery-Modus haben o.ä., d.h. nach der Fehlermeldung darf Ihr Parser
 Definieren Sie einen AST für die Zielsprache. Welche Informationen aus
 dem Eingabeprogramm müssen repräsentiert werden?
 
+> Aus meiner sicht ist nur ein ignorieren der "(", ")" notwendig 
+
 Programmieren Sie die entsprechenden Datenstrukturen in Java.
+
+> [Parser](Lexer_Parser/Parser.java)
 
 Programmieren Sie außerdem eine Traversierung des Parse-Trees, die den
 AST erzeugt. Testen Sie dies mit Ihren in der ersten Aufgabe

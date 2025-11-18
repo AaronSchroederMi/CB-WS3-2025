@@ -1,0 +1,16 @@
+1 ;; wow
+"a"
+b
+true
+false
+
+(= 1 1)
+(+ 1 (- 1 5))
+
+(def a a)
+(defn n (n) (print "abc"))
+(let (x 5) wow)
+
+(list 9 8 7)
+(nth (list "abc" false no) 2)
+(if (< 10 j) (do (tail (list 1 2 3)) (head (list 1 2 3))))
