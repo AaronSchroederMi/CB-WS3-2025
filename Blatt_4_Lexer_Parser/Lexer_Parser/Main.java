@@ -3,10 +3,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.concurrent.TransferQueue;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main() throws IOException {
         Lexer lexer = new Lexer();
         List<Token> tokens = lexer.tokenize(readFile());
         Parser parser = new Parser();
@@ -33,6 +32,6 @@ public class Main {
         }
         IO.println("Reading expr file: " + path);
         String expr = Files.readString(path, StandardCharsets.UTF_8);
-        return expr += "    ";
+        return expr + "    ";
     }
 }

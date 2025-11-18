@@ -19,9 +19,10 @@ public class Lexer {
             if (chars.isEmpty()) {
                 IO.println();
                 IO.println("Lexer Result:");
-                IO.println("-".repeat(result.toString().length()));
+                String s = "-".repeat(result.toString().length());
+                IO.println(s);
                 IO.println(result);
-                IO.println("-".repeat(result.toString().length()));
+                IO.println(s);
                 IO.println();
                 addToken(TokenType.EOF, "");
                 return;
