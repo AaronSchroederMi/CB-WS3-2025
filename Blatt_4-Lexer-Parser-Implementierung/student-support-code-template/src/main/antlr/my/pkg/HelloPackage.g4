@@ -6,19 +6,26 @@ package my.pkg;
 
 
 // Parser
-start : stmt* ;
+// start : stmt* ;
+start : stmt* EOF ;
 
+stmt  : expr ;
 
-stmt  : ID '=' expr ';' | expr ';' ;
+expr  : atom ;
 
-expr  : term ('+' term)* ;
-term  : atom ('*' atom)* ;
-
-atom  : ID | NUM ;
-
+atom  : STRING | BOOLEAN | INTEGER;
 
 // Lexer
-ID    : [a-z][a-zA-Z]* ;
-NUM   : [0-9]+ ;
 
+// Integer
+INTEGER   : [0-9]+ ;
+// Strings
+STRING :  '"' (~[\n\r"])+ '"' ;
+// Booleans
+BOOLEAN : 'true' | 'false' ;
+// Comments
+COMMENT : ';;' ~[\r\n]* -> skip ;
+// New lines for windows and other operation systems
+NL : '\r'?'\n' -> skip;
+// Skip tabs and whitespaces
 WS    : [ \t\n]+ -> skip ;
