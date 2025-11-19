@@ -1,0 +1,27 @@
+(defn swap (lst)
+    (if (> (head lst) (nth lst 1))
+        (do (let (t (tail lst)) (list (nth lst 1) (head lst)  (tail t) ) ) )
+        lst
+    )
+)
+
+(defn bubble (lst)
+    (if (= (tail lst) (list))
+        lst
+        (do
+            (swap lst)
+            (list (head lst) (bubble (tail lst)))
+        )
+    )
+)
+
+(defn sort (lst)
+    (if (= (tail lst) (list))
+        lst
+        (bubble lst)
+    )
+)
+
+(def mylist (list 4 2 5 1 3))
+
+(print (sort mylist))

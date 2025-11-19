@@ -1,0 +1,8 @@
+(def firstList (list 5 "abc" 10 5 false 0 45))
+
+(defn printList (n)
+    (print (head n) ", ")
+    (printList (tail n))
+)
+
+(printList firstList)
