@@ -8,18 +8,19 @@ package my.pkg;
 // start : stmt* ;
 start : stmt* EOF ;
 
-stmt : expr;
+stmt : listexpr;
 
 // List expressions
 listexpr
-     : listexpr rBracket
-     | '('
-     ;
+        : listexpr rBracket listexpr
+        | '('
+        ;
+
+// ('*'|'/'|'+'|'-'|'='|'>'|'<')
 
 // right bracket for list expressions
 rBracket
-        : ('*'|'/'|'+'|'-'|'='|'>'|'<')
-        | INTEGER* ')'
+        : ')'
         ;
 
 atom
