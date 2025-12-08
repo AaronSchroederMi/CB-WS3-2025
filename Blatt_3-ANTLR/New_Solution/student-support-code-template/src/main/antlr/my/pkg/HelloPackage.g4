@@ -4,21 +4,39 @@ grammar HelloPackage;
 package my.pkg;
 }
 
+// Parser Rules
+// EOF -> Stands for "End of line"
+start : (stmt | NEWLINE)* EOF ;
 
-// Parser
-start : stmt* ;
+stmt  : (ID ':=')? expr NEWLINE | condition;
 
+expr : value ((arithmeticOp|comparisonOp) value)* ;
 
-stmt  : ID '=' expr ';' | expr ';' ;
+condition : 'while' expr 'do' NEWLINE stmt* 'end' NEWLINE | 'if' expr 'do' NEWLINE stmt* ('else' 'do' NEWLINE stmt*)? 'end' NEWLINE ;
 
-expr  : term ('+' term)* ;
-term  : atom ('*' atom)* ;
+// No priority changes for alternatives at the same level
 
-atom  : ID | NUM ;
+arithmeticOp : ('*'|'/')        # POINTCALC
+             | ('+'|'-')        # LINECALC
+             ;
 
+comparisonOp : '=='     # EQUAL
+             | '!='     # NOTEQUAL
+             | '>' '='?     # GREATEREQ
+             | '<' '='?     # SMALLEREQ
+             ;
 
-// Lexer
-ID    : [a-z][a-zA-Z]* ;
-NUM   : [0-9]+ ;
+value : NUM | ID | STRING;
 
-WS    : [ \t\n]+ -> skip ;
+// Lexer Rules
+// Identifiers (Variables)
+ID : [a-zA-Z_][a-zA-Z0-9_]* ;
+STRING :  '"' (~[\n\r"])* '"' ;
+// Numbers
+NUM : [0-9]+ ;
+// Comments
+COMMENT : '#' ~[\r\n]* -> skip ;
+// New lines for windows and other operation systems
+NEWLINE : '\r'?'\n';
+// Skip tabs and whitespaces
+WS : [ \t]+ -> skip ;
