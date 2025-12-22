@@ -8,9 +8,9 @@ package my.pkg;
 // EOF -> Stands for "End of line"
 start : (stmt | NEWLINE)* EOF ;
 
-stmt  : ID ':=' expr | condition;
+stmt  : ID ':=' expr NEWLINE | condition;
 
-expr : (arOp|compOp)* NEWLINE | stringOp NEWLINE;
+expr : (arOp|compOp)* | stringOp ;
 
 condition : 'while' expr 'do' NEWLINE stmt* 'end' NEWLINE | 'if' expr 'do' NEWLINE stmt* ('else' 'do' NEWLINE stmt*)? 'end' NEWLINE ;
 
@@ -20,7 +20,7 @@ arOp
     | NUM|ID
     ;
 
-stringOp : STRING ('+' STRING)* ;
+stringOp : (STRING|ID) ('+' (STRING|ID))* ;
 
 compOp
         : compOp ('>''='?|'<''='?) compOp
