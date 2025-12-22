@@ -14,16 +14,14 @@ expr : value ((arithmeticOp|comparisonOp) value)* ;
 
 condition : 'while' expr 'do' NEWLINE stmt* 'end' NEWLINE | 'if' expr 'do' NEWLINE stmt* ('else' 'do' NEWLINE stmt*)? 'end' NEWLINE ;
 
-// No priority changes for alternatives at the same level
+arithmeticOp : mult | ('+'|'-') ;
 
-arithmeticOp : ('*'|'/')        # POINTCALC
-             | ('+'|'-')        # LINECALC
-             ;
+mult : ('*'|'/') ;
 
-comparisonOp : '=='     # EQUAL
-             | '!='     # NOTEQUAL
-             | '>' '='?     # GREATEREQ
-             | '<' '='?     # SMALLEREQ
+comparisonOp : '=='
+             | '!='
+             | '>' '='?
+             | '<' '='?
              ;
 
 value : NUM | ID | STRING;
