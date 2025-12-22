@@ -8,21 +8,25 @@ package my.pkg;
 // EOF -> Stands for "End of line"
 start : (stmt | NEWLINE)* EOF ;
 
-stmt  : (ID ':=')? expr NEWLINE | condition;
+stmt  : ID ':=' expr | condition;
 
-expr : value ((arithmeticOp|comparisonOp) value)* ;
+expr : (arOp|compOp)* NEWLINE | stringOp NEWLINE;
 
 condition : 'while' expr 'do' NEWLINE stmt* 'end' NEWLINE | 'if' expr 'do' NEWLINE stmt* ('else' 'do' NEWLINE stmt*)? 'end' NEWLINE ;
 
-arithmeticOp : mult | ('+'|'-') ;
+arOp
+    : arOp ('*'|'/') arOp
+    | arOp ('+'|'-') arOp
+    | NUM|ID
+    ;
 
-mult : ('*'|'/') ;
+stringOp : STRING ('+' STRING)* ;
 
-comparisonOp : '=='
-             | '!='
-             | '>' '='?
-             | '<' '='?
-             ;
+compOp
+        : compOp ('>''='?|'<''='?) compOp
+        | compOp ('=='|'!=') compOp
+        | value
+        ;
 
 value : NUM | ID | STRING;
 
