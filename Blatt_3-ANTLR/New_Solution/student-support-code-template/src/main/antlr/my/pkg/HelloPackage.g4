@@ -8,16 +8,25 @@ package my.pkg;
 // EOF -> Stands for "End of line"
 start : (stmt | NEWLINE)* EOF ;
 
-stmt  : ID ':=' expr NEWLINE | condition;
+stmt
+    : ID ':=' expr NEWLINE
+    | condition
+    ;
 
-expr : (arOp|compOp)* | stringOp ;
+expr
+    : (arOp|compOp)*
+    | stringOp
+    ;
 
-condition : 'while' expr 'do' NEWLINE stmt* 'end' NEWLINE | 'if' expr 'do' NEWLINE stmt* ('else' 'do' NEWLINE stmt*)? 'end' NEWLINE ;
+condition
+        : 'while' expr 'do' NEWLINE stmt* 'end' NEWLINE
+        | 'if' expr 'do' NEWLINE stmt* ('else' 'do' NEWLINE stmt*)? 'end' NEWLINE
+        ;
 
 arOp
     : arOp ('*'|'/') arOp
     | arOp ('+'|'-') arOp
-    | NUM|ID
+    | (NUM|ID)
     ;
 
 stringOp : (STRING|ID) ('+' (STRING|ID))* ;
@@ -28,7 +37,11 @@ compOp
         | value
         ;
 
-value : NUM | ID | STRING;
+value
+    : NUM
+    | ID
+    | STRING
+    ;
 
 // Lexer Rules
 // Identifiers (Variables)
