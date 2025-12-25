@@ -5,12 +5,20 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 public class Main {
   static void main(String... args) {
-    //IO.println("Hello World!");
 
-    // Einlesen über Konsole/Prompt
-    String input = IO.readln("expr?> ") + "\n";
+    String input = "";
+
+    try {
+        input = Files.readString(Path.of("src\\main\\resources\\input.txt"));
+    } catch (IOException e) {
+        System.out.println(e.getMessage());
+    }
 
     // Demonstriert den Einsatz von Packages und Grammatiken
     HelloPackageLexer lexer = new HelloPackageLexer(CharStreams.fromString(input));
@@ -21,7 +29,7 @@ public class Main {
     ParseTree tree = parser.start();
 
     ParseTreeWalker walker = new ParseTreeWalker();
-    MyListener listener = new MyListener();
+    MyListener listener = new MyListener(parser);
     System.out.println();
     System.out.println();
     walker.walk(listener, tree);

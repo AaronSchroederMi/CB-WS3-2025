@@ -6,7 +6,9 @@ package my.pkg;
 
 // Parser Rules
 // EOF -> Stands for "End of line"
-start : (stmt | NEWLINE)* EOF ;
+start
+    : (stmt | NEWLINE)* EOF
+    ;
 
 stmt
     : ID ':=' expr NEWLINE
@@ -29,13 +31,15 @@ arOp
     | (NUM|ID)
     ;
 
-stringOp : (STRING|ID) ('+' (STRING|ID))* ;
+stringOp
+    : (STRING|ID) ('+' (STRING|ID))*
+    ;
 
 compOp
-        : compOp ('>''='?|'<''='?) compOp
-        | compOp ('=='|'!=') compOp
-        | value
-        ;
+    : compOp ('>''='?|'<''='?) compOp
+    | compOp ('=='|'!=') compOp
+    | value
+    ;
 
 value
     : NUM
