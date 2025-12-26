@@ -9,7 +9,6 @@ public class MyListener extends HelloPackageBaseListener {
     public void visitTerminal(TerminalNode node) {
         // getText() for traversal with depth search
         String text = node.getText().replace("<EOF>", "");
-        text = text.replaceAll(" ", "");
 
         if(text.contains("else")) {
             identation = identation - 3;
