@@ -7,36 +7,33 @@ public class MyListener extends HelloPackageBaseListener {
     private boolean newlineMatched = false;
 
     public void visitTerminal(TerminalNode node) {
-        if(node.getText().contains("else")) {
-            if(identation != 0) {
-                identation = identation - 3;
-            }
-        } else if (node.getText().contains("end")) {
-            if(identation != 0) {
-                identation = identation - 3;
-            }
-        }
-
         // getText() for traversal with depth search
         String text = node.getText().replace("<EOF>", "");
         text = text.replaceAll(" ", "");
 
-        if(newlineMatched) {
+        if(text.contains("else")) {
+            identation = identation - 3;
+        } else if (text.contains("end")) {
+            identation = identation - 3;
+        }
+
+        if(newlineMatched & !text.contains("\n")) {
             System.out.println();
             for (int i = 0; i < identation; i++) {
                 System.out.print(" ");
             }
             System.out.print(text + " ");
-            newlineMatched = false;
-        } else {
+        } else if(!text.contains("\n")) {
             System.out.print(text + " ");
         }
 
-        newlineMatched = text.equals("\n");
+        newlineMatched = text.contains("\n");
 
-        if(node.getText().contains("if")) {
+        if(text.contains("if")) {
             identation = identation + 3;
-        } else if(node.getText().contains("else")) {
+        } else if(text.contains("else")) {
+            identation = identation + 3;
+        } else if(text.contains("while")) {
             identation = identation + 3;
         }
     }
