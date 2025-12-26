@@ -29,7 +29,7 @@ public class Main {
     ParseTree tree = parser.start();
 
     ParseTreeWalker walker = new ParseTreeWalker();
-    MyListener listener = new MyListener(parser);
+    MyListener listener = new MyListener();
     System.out.println();
     System.out.println();
     walker.walk(listener, tree);

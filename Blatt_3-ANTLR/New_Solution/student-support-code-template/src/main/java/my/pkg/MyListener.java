@@ -1,54 +1,43 @@
 package my.pkg;
 
-import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.tree.TerminalNode;
 
-public class MyListener extends HelloPackageBaseListener{
-    private final HelloPackageParser parser;
-    //private int depth = 0;
+public class MyListener extends HelloPackageBaseListener {
+    private int identation = 0;
+    private boolean newlineMatched = false;
 
-    public MyListener(HelloPackageParser parser) {
-        this.parser = parser;
-    }
+    public void visitTerminal(TerminalNode node) {
+        if(node.getText().contains("else")) {
+            if(identation != 0) {
+                identation = identation - 3;
+            }
+        } else if (node.getText().contains("end")) {
+            if(identation != 0) {
+                identation = identation - 3;
+            }
+        }
 
-    public void exitStart(HelloPackageParser.StartContext ctx) {
-        System.out.println("exitStart");
-        System.out.println(ctx.getText());
-    }
+        // getText() for traversal with depth search
+        String text = node.getText().replace("<EOF>", "");
+        text = text.replaceAll(" ", "");
 
-//    public void enterStmt(HelloPackageParser.StmtContext ctx) { }
-//
-//    public void enterExpr(HelloPackageParser.ExprContext ctx) { }
-//
-//    public void enterCondition(HelloPackageParser.ConditionContext ctx) { }
-//
-//    public void enterArOp(HelloPackageParser.ArOpContext ctx) { }
-//
-//    public void enterStringOp(HelloPackageParser.StringOpContext ctx) { }
-//
-//    public void enterCompOp(HelloPackageParser.CompOpContext ctx) { }
-//
-//    public void enterValue(HelloPackageParser.ValueContext ctx) { }
-//
-//    public void enterEveryRule(ParserRuleContext ctx) { }
-
-//    public void enterEveryRule(ParserRuleContext ctx) {
-//        try {
-//            String ruleName = parser.getRuleNames()[ctx.getRuleIndex()];
-//            System.out.println(ruleName + " " + depth * 2 + "\n Content: " + ctx.getText());
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//        depth++;
-//    }
-
-    public void exitEveryRule(ParserRuleContext ctx) {
-        try {
-            String ruleName = parser.getRuleNames()[ctx.getRuleIndex()];
-            System.out.println(ruleName + " " + "\nContent: " + ctx.getText());
-            System.out.println(ctx.getChildCount());
+        if(newlineMatched) {
             System.out.println();
-        } catch (Exception e) {
-            System.out.println("Exception: " + e);
+            for (int i = 0; i < identation; i++) {
+                System.out.print(" ");
+            }
+            System.out.print(text + " ");
+            newlineMatched = false;
+        } else {
+            System.out.print(text + " ");
+        }
+
+        newlineMatched = text.equals("\n");
+
+        if(node.getText().contains("if")) {
+            identation = identation + 3;
+        } else if(node.getText().contains("else")) {
+            identation = identation + 3;
         }
     }
 }
