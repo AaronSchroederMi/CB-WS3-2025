@@ -30,8 +30,6 @@ public class Main {
 
     ParseTreeWalker walker = new ParseTreeWalker();
     MyListener listener = new MyListener();
-    System.out.println();
-    System.out.println();
     walker.walk(listener, tree);
 
     // Output AST
