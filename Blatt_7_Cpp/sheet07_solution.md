@@ -38,63 +38,63 @@ zuständig.
 
 ### Beispiel für eine Tokenizer-Funktion
 
-Im folgenden Programmschnipsel soll eine Funktion `next_token()` das
+Im folgenden Programmschnipsel soll eine Funktion `next\\\_token()` das
 nächste Token berechnen. So eine Funktion findet sich typischerweise im
 Lexer. Für die Rückgabe des Tokens hat man in C++ drei Möglichkeiten:
 als Kopie, als Referenz oder als Pointer.
 
-```cpp
+``` cpp
 // Return as copy
-Token next_token() {
+Token next\\\_token() {
     Token wuppie = Token("wuppie", 1, 4);   // will be deleted automatically
     Token bar = Token("bar", 7, 10);        // not used, will be deleted automatically
 
     return wuppie;
 }
 int main() {
-    Token x = next_token();                 // copy constructor; no need to free
+    Token x = next\\\_token();                 // copy constructor; no need to free
 }
 ```
 
-```cpp
+``` cpp
 // Return as pointer
-Token* next_token() {
-    Token* foo = new Token("foo", 9, 35);   // will be free'd manually
-    Token* bar = new Token("bar", 7, 10);   // leaves a memory hole!!!
+Token\\\* next\\\_token() {
+    Token\\\* foo = new Token("foo", 9, 35);   // will be free'd manually
+    Token\\\* bar = new Token("bar", 7, 10);   // leaves a memory hole!!!
 
     return foo;
 }
 int main() {
-    Token* x = next_token();                // only the pointer (i.e. address) will be copied
+    Token\\\* x = next\\\_token();                // only the pointer (i.e. address) will be copied
     ...
     delete x;                               // caller needs to free this object
 }
 ```
 
-```cpp
+``` cpp
 // Return as C++ reference
-Token& next_token() {
-    Token* foo = new Token("foo", 9, 35);   // will be free'd manually
-    Token* bar = new Token("bar", 7, 10);   // leaves a memory hole!!!
+Token\\\& next\\\_token() {
+    Token\\\* foo = new Token("foo", 9, 35);   // will be free'd manually
+    Token\\\* bar = new Token("bar", 7, 10);   // leaves a memory hole!!!
 
-    return *foo;
+    return \\\*foo;
 }
 int main() {
-    Token& x = next_token();                // no copy, `x` is just a new alias for `foo`
+    Token\\\& x = next\\\_token();                // no copy, `x` is just a new alias for `foo`
     ...
-    delete &x;                              // caller needs to free this object
+    delete \\\&x;                              // caller needs to free this object
 }
 ```
 
 Die Rückgabe per Kopie (Standardfall in C/C++) würde ein lokales Objekt
 auf dem Stack (im Beispiel wäre das `wuppie`) als Kopie zurückgeben.
 
-- Vorteil: Der Compiler kümmert sich um die Freigabe der lokalen
+* Vorteil: Der Compiler kümmert sich um die Freigabe der lokalen
   Variable `wuppie`, d.h. nach Beendigung des Funktionsaufrufs wird das
   Objekt automatisch vom Stack entfernt. Da hierbei einfach der
   Stackpointer zurückgesetzt wird, ist diese “Freigabe” eine sehr
-  preiswerte Operation.[^1]
-- Nachteil: Der Aufrufer darf nicht einfach auf das Objekt auf dem Stack
+  preiswerte Operation.\[^1]
+* Nachteil: Der Aufrufer darf nicht einfach auf das Objekt auf dem Stack
   zugreifen (dieses ist ja nach Beendigung der Funktion nicht mehr
   gültig). Deshalb muss das Objekt bei der Rückgabe kopiert werden
   (Copy-Konstruktor). Zusätzlich erfolgt beim Aufrufer oft noch eine
@@ -106,11 +106,11 @@ Funktion erzeugt wird und dessen Lebensdauer über das Funktionsende
 hinausreicht. Das Objekt muss in diesem Fall also auf dem Heap angelegt
 werden.
 
-- Vorteil: Die Rückgabe erfordert lediglich die Kopie der Adresse des
+* Vorteil: Die Rückgabe erfordert lediglich die Kopie der Adresse des
   Objekts (also des Pointers). Hier handelt es sich vereinfacht
   betrachtet um einen Integer, d.h. diese Operation ist relativ
   preiswert.
-- Nachteil: Das Objekt muss vom Aufrufer wieder freigegeben werden,
+* Nachteil: Das Objekt muss vom Aufrufer wieder freigegeben werden,
   sobald es nicht mehr benötigt wird. Dies muss man explizit
   programmieren!
 
@@ -119,10 +119,10 @@ innerhalb der Funktion erzeugt wird und dessen Lebensdauer über das
 Funktionsende hinausreicht. Das Objekt muss in diesem Fall also wieder
 auf dem Heap angelegt werden.
 
-- Vorteil: Die Rückgabe erfordert keinerlei Kopien, da sich die Referenz
+* Vorteil: Die Rückgabe erfordert keinerlei Kopien, da sich die Referenz
   `x` an das Objekt `foo` bindet und lediglich einen neuen Alias für
   dieses Objekt darstellt.
-- Nachteil: Das Objekt muss vom Aufrufer wieder freigegeben werden,
+* Nachteil: Das Objekt muss vom Aufrufer wieder freigegeben werden,
   sobald es nicht mehr benötigt wird. Dies muss man explizit
   programmieren!
 
@@ -140,7 +140,7 @@ arbeitet, hat man in C++ die sogenannten
 [Smart-Pointer](https://en.cppreference.com/book/intro/smart_pointers)
 erdacht. Diese ersetzen den direkten Umgang mit den einfachen Pointern
 (auch als *raw pointer* bezeichnet) und lösen das Problem der Freigabe
-der verwalteten Ressourcen.[^2] Es gibt verschiedene Modelle,
+der verwalteten Ressourcen.\[^2] Es gibt verschiedene Modelle,
 insbesondere gibt es die Variante *unique pointer*, bei der immer nur
 genau ein Smart-Pointer gleichzeitig eine bestimmte Ressource besitzen
 darf, und die *shared pointer*, bei der mehrere Smart-Pointer
@@ -204,27 +204,27 @@ dabei automatisch der Pointer zu “wuppie” wieder freigegeben.
 
 Ein Smart-Pointer soll entsprechend folgende Eigenschaften haben:
 
-- Verwendung soll analog zu normalen Pointern sein (Operatoren `*` und
+* Verwendung soll analog zu normalen Pointern sein (Operatoren `\\\*` und
   `->` überladen)
-- Smart-Pointer haben niemals einen undefinierten Wert: entweder sie
-  zeigen auf ein Objekt oder auf `nullptr`[^3]
-- Kopieren von (*shared*) Smart-Pointern führt dazu, dass sich mehrere
+* Smart-Pointer haben niemals einen undefinierten Wert: entweder sie
+  zeigen auf ein Objekt oder auf `nullptr`\[^3]
+* Kopieren von (*shared*) Smart-Pointern führt dazu, dass sich mehrere
   Smart-Pointer das verwiesene Objekt *teilen*
-- Smart-Pointer löschen sich selbst (und das verwiesene Objekt, falls
+* Smart-Pointer löschen sich selbst (und das verwiesene Objekt, falls
   kein anderer Smart-Pointer mehr darauf zeigt), wenn die Smart-Pointer
   ungültig werden (bei Verlassen des Scopes bzw. bei explizitem Aufruf
   von `delete` auf einen Pointer auf einen Smart-Pointer)
-- Es gibt keine verwitweten Objekte mehr: Wenn mehrere Smart-Pointer auf
+* Es gibt keine verwitweten Objekte mehr: Wenn mehrere Smart-Pointer auf
   das selbe Objekt zeigen, darf erst der letzte Smart-Pointer das Objekt
   aus dem Heap löschen
-- Smart-Pointer funktionieren nur für mit `new` erzeugte Objekte
+* Smart-Pointer funktionieren nur für mit `new` erzeugte Objekte
 
 Weitere übliche Eigenschaften, die wir auf diesem Blatt aber
-vereinfachend ignorieren[^4]:
+vereinfachend ignorieren\[^4]:
 
-- Smart-Pointer sollen für beliebige Klassen nutzbar sein
+* Smart-Pointer sollen für beliebige Klassen nutzbar sein
   (Template-Klasse)
-- Dereferenzierung von nicht existierenden Objekten (d.h. der
+* Dereferenzierung von nicht existierenden Objekten (d.h. der
   Smart-Pointer zeigt intern auf `nullptr`) führt nicht zum
   Programmabsturz, sondern zu einer Exception
 
@@ -250,76 +250,76 @@ Bei einer Zuweisung verfährt man analog.
 ``` cpp
 class SmartToken {
 public:
-    /**
-     * Constructor
-     *
-     * Constructs a new smart pointer from a raw pointer, sets the reference
-     * counter to 1.
-     *
-     * @param p is a raw pointer to the token to be shared
-     */
-    SmartToken(Token* p = nullptr);
+    /\\\*\\\*
+     \\\* Constructor
+     \\\*
+     \\\* Constructs a new smart pointer from a raw pointer, sets the reference
+     \\\* counter to 1.
+     \\\*
+     \\\* @param p is a raw pointer to the token to be shared
+     \\\*/
+    SmartToken(Token\\\* p = nullptr);
 
-    /**
-     * Copy constructor
-     *
-     * Constructs a new smart pointer from another smart pointer, increments
-     * the reference counter.
-     *
-     * @param sp is another smart pointer
-     */
-    SmartToken(const SmartToken& sp);
+    /\\\*\\\*
+     \\\* Copy constructor
+     \\\*
+     \\\* Constructs a new smart pointer from another smart pointer, increments
+     \\\* the reference counter.
+     \\\*
+     \\\* @param sp is another smart pointer
+     \\\*/
+    SmartToken(const SmartToken\\\& sp);
 
-    /**
-     * Destructor
-     *
-     * Decrements the reference counter. If it reaches zero, the shared token
-     * will be free'd.
-     */
+    /\\\*\\\*
+     \\\* Destructor
+     \\\*
+     \\\* Decrements the reference counter. If it reaches zero, the shared token
+     \\\* will be free'd.
+     \\\*/
     ~SmartToken();
 
-    /**
-     * Assignment
-     *
-     * Changes the shared token, thus we need first to perform something like
-     * the destructor, followed by something like the constructor.
-     *
-     * @param sp is another smart pointer
-     */
-    SmartToken& operator=(const SmartToken& sp);
+    /\\\*\\\*
+     \\\* Assignment
+     \\\*
+     \\\* Changes the shared token, thus we need first to perform something like
+     \\\* the destructor, followed by something like the constructor.
+     \\\*
+     \\\* @param sp is another smart pointer
+     \\\*/
+    SmartToken\\\& operator=(const SmartToken\\\& sp);
 
 private:
-    Token* pObj;        ///< Pointer to the current shared token
-    RefCounter* rc;     ///< Pointer to the reference counter (used for the current token)
+    Token\\\* pObj;        ///< Pointer to the current shared token
+    RefCounter\\\* rc;     ///< Pointer to the reference counter (used for the current token)
 };
 
 class RefCounter {
 public:
-    /**
-     * Default constructor
-     */
+    /\\\*\\\*
+     \\\* Default constructor
+     \\\*/
     RefCounter();
 
-    /**
-     * Increment count
-     */
+    /\\\*\\\*
+     \\\* Increment count
+     \\\*/
     void inc();
 
-    /**
-     * Decrement count
-     */
+    /\\\*\\\*
+     \\\* Decrement count
+     \\\*/
     void dec();
 
-    /**
-     * Compare the counter with zero
-     *
-     * @return true if n==0, false otherwise
-     */
+    /\\\*\\\*
+     \\\* Compare the counter with zero
+     \\\*
+     \\\* @return true if n==0, false otherwise
+     \\\*/
     bool isZero() const;
 
     // Hide copy constructor and assignment operator
-    RefCounter(const RefCounter&) = delete;
-    RefCounter& operator=(const RefCounter&) = delete;
+    RefCounter(const RefCounter\\\&) = delete;
+    RefCounter\\\& operator=(const RefCounter\\\&) = delete;
 
 private:
     unsigned int n;     ///< How many SmartToken share ownership of "our" object?
@@ -339,19 +339,19 @@ indem die beiden Dereferenzierungsoperatoren überladen werden.
 ``` cpp
 class SmartToken {
 public:
-    /**
-     * Dereferences the smart pointer
-     *
-     * @return a reference to the shared token
-     */
-    Token& operator*();
+    /\\\*\\\*
+     \\\* Dereferences the smart pointer
+     \\\*
+     \\\* @return a reference to the shared token
+     \\\*/
+    Token\\\& operator\\\*();
 
-    /**
-     * Dereferences the smart pointer
-     *
-     * @return a pointer to the shared token
-     */
-    Token* operator->();
+    /\\\*\\\*
+     \\\* Dereferences the smart pointer
+     \\\*
+     \\\* @return a pointer to the shared token
+     \\\*/
+    Token\\\* operator->();
 };
 ```
 
@@ -359,19 +359,19 @@ Damit lässt sich das folgende Verhalten realisieren (Vergleich *raw*
 Pointer vs. Smart-Pointer):
 
 ``` cpp
-Token* foo = new Token("foo", 9, 35);                       // raw pointer foo
+Token\\\* foo = new Token("foo", 9, 35);                       // raw pointer foo
 SmartToken wuppie = SmartToken(new Token("wuppie", 1, 4));  // smart pointer wuppie
 
 // Access via token pointer
-cout << (*foo).lexem    << endl;    // "foo"
+cout << (\\\*foo).lexem    << endl;    // "foo"
 cout << foo->lexem      << endl;    // "foo"
 
 // Access via smart pointer
-cout << (*wuppie).lexem << endl;    // "wuppie"
+cout << (\\\*wuppie).lexem << endl;    // "wuppie"
 cout << wuppie->lexem   << endl;    // "wuppie"
 ```
 
-Dabei ist die Form “`->`” eine vereinfachte Darstellung von `(*ptr).`,
+Dabei ist die Form “`->`” eine vereinfachte Darstellung von `(\\\*ptr).`,
 d.h. ein Pointer (linke Seite des Ausdrucks) wird dereferenziert und man
 greift auf Attribute oder Methoden des verwiesenen Objekts zu (rechte
 Seite des Ausdrucks).
@@ -386,22 +386,22 @@ Schnittstelle:
 ``` cpp
 class Token {
 public:
-    /**
-     * Constructs a new token object.
-     *
-     * @param l is a pointer to the text of the token (to be copied)
-     * @param r is the row in input where this token was found
-     * @param c is the column in input where this token starts
-     */
-    Token(const char* l, int r, int c);
+    /\\\*\\\*
+     \\\* Constructs a new token object.
+     \\\*
+     \\\* @param l is a pointer to the text of the token (to be copied)
+     \\\* @param r is the row in input where this token was found
+     \\\* @param c is the column in input where this token starts
+     \\\*/
+    Token(const char\\\* l, int r, int c);
 
-    /**
-     * Destructs the token object and free's the stored lexem.
-     */
+    /\\\*\\\*
+     \\\* Destructs the token object and free's the stored lexem.
+     \\\*/
     ~Token();
 
 private:
-    char* lexem;    ///< Pointer to the text of the token
+    char\\\* lexem;    ///< Pointer to the text of the token
     int row;        ///< Row in input where this token was found
     int col;        ///< Column in input where this token starts
 };
@@ -409,9 +409,9 @@ private:
 
 Trennen Sie Deklaration und Implementierung.
 
-Der Konstruktor muss den übergebenen `char*` kopieren, d.h. Sie müssen
+Der Konstruktor muss den übergebenen `char\\\*` kopieren, d.h. Sie müssen
 die Länge des übergebenen C-Strings bestimmen, ausreichend viel Speicher
-mit `new` für `char* lexem` reservieren und danach den String kopieren
+mit `new` für `char\\\* lexem` reservieren und danach den String kopieren
 (C-Funktion).
 
 Sorgen Sie dafür, dass der Speicher beim Vernichten eines
@@ -424,7 +424,7 @@ Testen Sie Ihre `Token`-Klasse an selbst gewählten Beispielen.
 ### A7.2: Implementierung eines einfachen Tokenizers (1P)
 
 Erstellen Sie eine Funktion
-`void tokenize(const string& input, vector<Token>& tokens)`, die einen
+`void tokenize(const string\\\& input, vector<Token>\\\& tokens)`, die einen
 gegebenen String als Eingabe erhält und diesen in Tokens (Wörter)
 splittet. Nutzen Sie Referenzen, um die Token-Liste zu aktualisieren.
 Testen Sie die Funktion mit verschiedenen Eingabestrings und geben Sie
@@ -446,69 +446,69 @@ folgender Signatur (wie oben, leicht erweitert):
 ``` cpp
 class SmartToken {
 public:
-    /**
-     * Constructor
-     *
-     * Constructs a new smart pointer from a raw pointer, sets the reference
-     * counter to 1.
-     *
-     * @param p is a raw pointer to the token to be shared
-     */
-    SmartToken(Token* p = nullptr);
+    /\\\*\\\*
+     \\\* Constructor
+     \\\*
+     \\\* Constructs a new smart pointer from a raw pointer, sets the reference
+     \\\* counter to 1.
+     \\\*
+     \\\* @param p is a raw pointer to the token to be shared
+     \\\*/
+    SmartToken(Token\\\* p = nullptr);
 
-    /**
-     * Copy constructor
-     *
-     * Constructs a new smart pointer from another smart pointer, increments
-     * the reference counter.
-     *
-     * @param sp is another smart pointer
-     */
-    SmartToken(const SmartToken& sp);
+    /\\\*\\\*
+     \\\* Copy constructor
+     \\\*
+     \\\* Constructs a new smart pointer from another smart pointer, increments
+     \\\* the reference counter.
+     \\\*
+     \\\* @param sp is another smart pointer
+     \\\*/
+    SmartToken(const SmartToken\\\& sp);
 
-    /**
-     * Destructor
-     *
-     * Decrements the reference counter. If it reaches zero, the shared token
-     * will be free'd.
-     */
+    /\\\*\\\*
+     \\\* Destructor
+     \\\*
+     \\\* Decrements the reference counter. If it reaches zero, the shared token
+     \\\* will be free'd.
+     \\\*/
     ~SmartToken();
 
-    /**
-     * Assignment
-     *
-     * Changes the shared token, thus we need first to perform something like
-     * the destructor, followed by something like the constructor.
-     *
-     * @param sp is another smart pointer
-     */
-    SmartToken& operator=(const SmartToken& sp);
+    /\\\*\\\*
+     \\\* Assignment
+     \\\*
+     \\\* Changes the shared token, thus we need first to perform something like
+     \\\* the destructor, followed by something like the constructor.
+     \\\*
+     \\\* @param sp is another smart pointer
+     \\\*/
+    SmartToken\\\& operator=(const SmartToken\\\& sp);
 
-    /**
-     * Dereferences the smart pointer
-     *
-     * @return a reference to the shared token
-     */
-    Token& operator*();
+    /\\\*\\\*
+     \\\* Dereferences the smart pointer
+     \\\*
+     \\\* @return a reference to the shared token
+     \\\*/
+    Token\\\& operator\\\*();
 
-    /**
-     * Dereferences the smart pointer
-     *
-     * @return a pointer to the shared token
-     */
-    Token* operator->();
+    /\\\*\\\*
+     \\\* Dereferences the smart pointer
+     \\\*
+     \\\* @return a pointer to the shared token
+     \\\*/
+    Token\\\* operator->();
 
-    /**
-     * Comparison
-     *
-     * @param sp is another smart pointer
-     * @return true, if `sp` shares the same token
-     */
-    bool operator==(const SmartToken& sp) const;
+    /\\\*\\\*
+     \\\* Comparison
+     \\\*
+     \\\* @param sp is another smart pointer
+     \\\* @return true, if `sp` shares the same token
+     \\\*/
+    bool operator==(const SmartToken\\\& sp) const;
 
 private:
-    Token* pObj;        ///< Pointer to the current shared token
-    RefCounter* rc;     ///< Pointer to the reference counter (used for the current token)
+    Token\\\* pObj;        ///< Pointer to the current shared token
+    RefCounter\\\* rc;     ///< Pointer to the reference counter (used for the current token)
 };
 ```
 
@@ -536,7 +536,7 @@ dem frei gewordenen Platz im internen Array `elems` eingefügt.
 
 Unser Ringpuffer ist auf Elemente vom Typ `SmartToken` festgelegt. Es
 wird davon ausgegangen, dass diese Elemente Smart-Pointer mit der
-*shared pointer*-Semantik sind.[^5] Da die `SmartToken` selbst (zum
+*shared pointer*-Semantik sind.\[^5] Da die `SmartToken` selbst (zum
 Teil) eine Pointersemantik implementiert haben (man kann die
 Smart-Pointer dereferenzieren), vermeiden wir Pointer auf die
 Smart-Pointer in der Schnittstelle und arbeiten stattdessen mit
@@ -555,52 +555,52 @@ folgender Signatur:
 ``` cpp
 class RingBuffer {
 public:
-    /**
-     * Constructor that creates a new ring buffer for max. `size` elements
-     *
-     * Initialises the attributes and allocates memory for `size` elements
-     * of type `SmartToken` and let the pointer `elems` point to this new
-     * array
-     *
-     * @param size is the max. number of elements that can be stored
-     */
+    /\\\*\\\*
+     \\\* Constructor that creates a new ring buffer for max. `size` elements
+     \\\*
+     \\\* Initialises the attributes and allocates memory for `size` elements
+     \\\* of type `SmartToken` and let the pointer `elems` point to this new
+     \\\* array
+     \\\*
+     \\\* @param size is the max. number of elements that can be stored
+     \\\*/
     RingBuffer(unsigned int size);
 
-    /**
-     * Destructor
-     *
-     * free's the dynamically allocated array `elems`
-     */
+    /\\\*\\\*
+     \\\* Destructor
+     \\\*
+     \\\* free's the dynamically allocated array `elems`
+     \\\*/
     ~RingBuffer();
 
-    /**
-     * Reading the first (oldest) element
-     *
-     * If an element has been read, the `head` points to the next element
-     * and `count` is decremented. The read element is **not** released.
-     *
-     * @return Returns (a copy of) the first (i.e. oldest) element of the
-     * buffer, but does not (yet) release it; returns an empty `SmartToken`
-     * if buffer is empty
-     */
+    /\\\*\\\*
+     \\\* Reading the first (oldest) element
+     \\\*
+     \\\* If an element has been read, the `head` points to the next element
+     \\\* and `count` is decremented. The read element is \\\*\\\*not\\\*\\\* released.
+     \\\*
+     \\\* @return Returns (a copy of) the first (i.e. oldest) element of the
+     \\\* buffer, but does not (yet) release it; returns an empty `SmartToken`
+     \\\* if buffer is empty
+     \\\*/
     SmartToken readBuffer();
 
-    /**
-     * Adding a new element
-     *
-     * Appends the new element to the end of the queue. If the buffer is
-     * full, the oldest element will be overwritten by the new element. The
-     * old element will take care of releasing its memory (smart pointer).
-     *
-     * @param data is a reference to the element to be added
-     */
-    void writeBuffer(const SmartToken& data);
+    /\\\*\\\*
+     \\\* Adding a new element
+     \\\*
+     \\\* Appends the new element to the end of the queue. If the buffer is
+     \\\* full, the oldest element will be overwritten by the new element. The
+     \\\* old element will take care of releasing its memory (smart pointer).
+     \\\*
+     \\\* @param data is a reference to the element to be added
+     \\\*/
+    void writeBuffer(const SmartToken\\\& data);
 
 private:
     unsigned int count;     ///< number of elements currently stored in the buffer
     unsigned int head;      ///< points to the beginning of the buffer (oldest element)
     unsigned int size;      ///< length of array `elems`
-    SmartToken* elems;      ///< array with `size` places of type `SmartToken`, dynamically allocated
+    SmartToken\\\* elems;      ///< array with `size` places of type `SmartToken`, dynamically allocated
 };
 ```
 
@@ -612,7 +612,7 @@ Ringstruktur und prüfen Sie, ob die Smart-Pointer wie gewünscht
 arbeiten. Prüfen Sie hierzu auch die `RefCounter` der beteiligten
 Smart-Pointer. Welche Sonderfälle können Sie identifizieren?
 
-------------------------------------------------------------------------
+---
 
 <img src="https://licensebuttons.net/l/by-sa/4.0/88x31.png" width="10%">
 
@@ -620,21 +620,22 @@ Unless otherwise noted, this work is licensed under CC BY-SA 4.0.
 
 <blockquote><p><sup><sub><strong>Last modified:</strong> 7b260e5 (homework: finalize B07 (#379), 2025-10-03)<br></sub></sup></p></blockquote>
 
-[^1]: Anmerkung: Man spricht trotzdem von “Freigabe” des Objekts, obwohl
-    lediglich der Stackpointer zurückgesetzt wird und das Objekt
-    zunächst auf dem Stack noch vollständig ist. Es kann und wird aber
-    im weiteren Verlauf des Programms überschrieben.
+\[^1]: Anmerkung: Man spricht trotzdem von “Freigabe” des Objekts, obwohl
+lediglich der Stackpointer zurückgesetzt wird und das Objekt
+zunächst auf dem Stack noch vollständig ist. Es kann und wird aber
+im weiteren Verlauf des Programms überschrieben.
 
-[^2]: Dereferenzierung von Null-Pointern oder nicht initialisierten
-    Pointern, Nutzung von `delete` für Pointer, die nicht mit `new`
-    erstellt wurden, mehrfaches `delete`, Speicherlöcher durch Vergessen
-    von `delete`, Dangling Pointer, verwitwete Objekte, …
+\[^2]: Dereferenzierung von Null-Pointern oder nicht initialisierten
+Pointern, Nutzung von `delete` für Pointer, die nicht mit `new`
+erstellt wurden, mehrfaches `delete`, Speicherlöcher durch Vergessen
+von `delete`, Dangling Pointer, verwitwete Objekte, …
 
-[^3]: Sie müssen für `nullptr` den g++ auf C++11 oder höher umstellen
-    (`--std=c++11`) und den Header `<cstddef>` includen.
+\[^3]: Sie müssen für `nullptr` den g++ auf C++11 oder höher umstellen
+(`--std=c++11`) und den Header `<cstddef>` includen.
 
-[^4]: Templates haben wir hier noch nicht behandelt, Exceptions werden
-    wir gar nicht betrachten
+\[^4]: Templates haben wir hier noch nicht behandelt, Exceptions werden
+wir gar nicht betrachten
 
-[^5]: Wenn Sie die obigen Aufgaben richtig gelöst haben, haben Sie genau
-    diese Semantik vorliegen.
+\[^5]: Wenn Sie die obigen Aufgaben richtig gelöst haben, haben Sie genau
+diese Semantik vorliegen.
+
