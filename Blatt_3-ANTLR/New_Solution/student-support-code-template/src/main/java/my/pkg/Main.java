@@ -29,8 +29,16 @@ public class Main {
     ParseTree tree = parser.start();
 
     ParseTreeWalker walker = new ParseTreeWalker();
+
+    // Traversal with listener
     MyListener listener = new MyListener();
     walker.walk(listener, tree);
+
+    System.out.println();
+
+    // Traversal with visitor Pattern
+    MyVisitor visitor = new MyVisitor();
+    visitor.visit(tree);
 
     // Output AST
     // IO.println(tree.toStringTree(parser));
