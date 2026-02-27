@@ -1,48 +1,52 @@
 package my.pkg;
 
+// Labeling: ANTLR rule context is replaced with individual contexts for each alt.
+// For precise identification what ANTLR does
 
-/*
-Explanation Visitor Pattern:
-- Outsourcing the logic of the classes in a new class (Class which implements Visitor interface)
-- Double Dispatch determines which function to use
-- Classes who want to use the functions need to implement the accept method
-*/
+// Parse Tree (Concrete Syntax Tree)
+// Ein Parse Tree ist im Prinzip die Grammatik als Baum:
+// Jede Regel, die du in der Grammar hast (z. B. stmt, expr, term, factor), taucht typischerweise als Knoten auf
+// Plus alle Tokens (:=, do, end, NEWLINE, Klammern, …)
+// Er enthält also sehr viel „Parsing-Kram“, der nur dazu da ist, dass die Grammatik funktioniert
 
+// AST (Abstract Syntax Tree)
+// Enthält nur semantisch relevante Konstrukte
+// Statements: Assign, If, While, …
+// Expressions: BinaryOp, Var, Literal, …
+// lässt “reine Syntax” weg:
+// do, end, NEWLINE, Klammern
+// Hilfsregeln (expr/term/factor) werden oft komplett weggedacht
+
+import org.antlr.v4.runtime.tree.TerminalNode;
+
+// MyVisitor ist die Klasse des Besuchers.
 public class MyVisitor extends HelloPackageBaseVisitor<Object> {
 
-    @Override public Object visitStart(HelloPackageParser.StartContext ctx) {
-        return visitChildren(ctx);
+    public Object visitAssignStmt(HelloPackageParser.AssignStmtContext ctx) {
+        visit(ctx.ID());
+        System.out.print(" := ");
+        // returned expression of generic object  Expression x = (Expression)visit(ctx.expr());
+        Expression x = (Expression)visit(ctx.expr());
+        visit(ctx.NEWLINE());
+        return new Assign(ctx.ID().getText(), x);
     }
 
-    @Override public Object visitStmt(HelloPackageParser.StmtContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public Object visitExpr(HelloPackageParser.ExprContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public Object visitCondition(HelloPackageParser.ConditionContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public Object visitArOp(HelloPackageParser.ArOpContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public Object visitStringOp(HelloPackageParser.StringOpContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override
-    public Object visitCompOp(HelloPackageParser.CompOpContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override
-    public Object visitValue(HelloPackageParser.ValueContext ctx) {
-        System.out.println("Test");
-        return visitChildren(ctx);
+    public Object visitTerminal(TerminalNode node) {
+        System.out.print(node.getText());
+        return null;
     }
 }
 
+/*
+     visitor.visit(root)
+           ↓
+     root.accept(visitor)
+           ↓
+     visitor.visitAssignStmt(ctx)
+           ↓
+     visit(ctx.expr())
+           ↓
+     expr.accept(visitor)
+           ↓
+     visitor.visitExpr(ctx)
+*/

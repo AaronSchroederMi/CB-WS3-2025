@@ -38,9 +38,10 @@ public class Main {
 
     // Traversal with visitor Pattern
     MyVisitor visitor = new MyVisitor();
-    visitor.visit(tree);
+    Object Ast = visitor.visit(tree);
+    // System.out.println(Ast.toString());
 
     // Output AST
-    // IO.println(tree.toStringTree(parser));
+    IO.println(tree.toStringTree(parser));
   }
 }

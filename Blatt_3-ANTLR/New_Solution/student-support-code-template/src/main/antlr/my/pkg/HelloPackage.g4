@@ -10,9 +10,11 @@ start
     : (stmt | NEWLINE)* EOF
     ;
 
+// Assign(String(ID),expression(expr))
+
 stmt
-    : ID ':=' expr NEWLINE
-    | condition
+    : ID ':=' expr NEWLINE  #AssignStmt
+    | condition #conditionStmt
     ;
 
 expr
@@ -21,14 +23,14 @@ expr
     ;
 
 condition
-        : 'while' expr 'do' NEWLINE stmt* 'end' NEWLINE
-        | 'if' expr 'do' NEWLINE stmt* ('else' 'do' NEWLINE stmt*)? 'end' NEWLINE
+        : 'while' expr 'do' NEWLINE stmt* 'end' NEWLINE #whileStmt
+        | 'if' expr 'do' NEWLINE stmt* ('else' 'do' NEWLINE stmt*)? 'end' NEWLINE #ifStmt
         ;
 
 arOp
-    : arOp ('*'|'/') arOp
-    | arOp ('+'|'-') arOp
-    | (NUM|ID)
+    : left=arOp ('*'|'/') right=arOp #MulDiv
+    | left=arOp ('+'|'-') right=arOp #PlusMin
+    | (NUM|ID) #NUM
     ;
 
 stringOp

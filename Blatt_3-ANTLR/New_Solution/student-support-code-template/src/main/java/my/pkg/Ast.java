@@ -1,19 +1,24 @@
 package my.pkg;
 
+// Class declaration in visitor traversal and we "return" them
 
-class ExpressionNode { }
+// sealed nobody can inherit except ...
+sealed interface Statement permits IfStatement, whileStatement, Assign{ }
 
-class StartNode { }
+sealed interface Expression permits AdditionNode, SubtractionNode, DivisionNode, ValueNode  { }
 
-class StmtNode {}
+//sealed interface Value permits ValueNode {}
 
-class ConditionNode {}
+record ValueNode(String value) implements Expression { }
 
-class arithmeticNode { }
+record AdditionNode() implements Expression { }
 
-class StringOperationNode { }
+record Assign(String id, Expression expression) implements Statement { }
 
-class ComparisonNode { }
+record SubtractionNode() implements Expression{}
 
-class ValueNode { }
+record DivisionNode() implements Expression {}
 
+record IfStatement() implements Statement {}
+
+record whileStatement() implements Statement {}
