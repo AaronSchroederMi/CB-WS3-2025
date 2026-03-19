@@ -15,7 +15,7 @@ public class Main {
     String input = "";
 
     try {
-        input = Files.readString(Path.of("src\\main\\resources\\input.txt"));
+        input = Files.readString(Path.of("C:\\Users\\Muhammed Korkmaz\\Documents\\CB-WS3-2025\\Blatt_3-ANTLR\\New_Solution\\student-support-code-template\\src\\main\\resources\\input.txt"));
     } catch (IOException e) {
         System.out.println(e.getMessage());
     }
@@ -32,16 +32,14 @@ public class Main {
 
     // Traversal with listener
     MyListener listener = new MyListener();
+    System.out.println("Pretty printing with listeners");
     walker.walk(listener, tree);
 
     System.out.println();
+    System.out.println("Pretty printing with visitor pattern");
 
     // Traversal with visitor Pattern
     MyVisitor visitor = new MyVisitor();
-    Object Ast = visitor.visit(tree);
-    // System.out.println(Ast.toString());
-
-    // Output AST
-    IO.println(tree.toStringTree(parser));
+    visitor.visit(tree);
   }
 }

@@ -24,7 +24,11 @@ expr
 
 condition
         : 'while' expr 'do' NEWLINE stmt* 'end' NEWLINE #whileStmt
-        | 'if' expr 'do' NEWLINE stmt* ('else' 'do' NEWLINE stmt*)? 'end' NEWLINE #ifStmt
+        | 'if' expr 'do' NEWLINE stmt* (elsedo)? 'end' NEWLINE #ifStmt
+        ;
+
+elsedo
+        : 'else' 'do' NEWLINE stmt*
         ;
 
 arOp
@@ -38,8 +42,8 @@ stringOp
     ;
 
 compOp
-    : compOp ('>''='?|'<''='?) compOp
-    | compOp ('=='|'!=') compOp
+    : leftCompOp=compOp ('>''='?|'<''='?) compOp
+    | leftCompOp=compOp ('=='|'!=') compOp
     | value
     ;
 
@@ -52,6 +56,7 @@ value
 // Lexer Rules
 // Identifiers (Variables)
 ID : [a-zA-Z_][a-zA-Z0-9_]* ;
+// String expressions
 STRING :  '"' (~[\n\r"])* '"' ;
 // Numbers
 NUM : [0-9]+ ;
