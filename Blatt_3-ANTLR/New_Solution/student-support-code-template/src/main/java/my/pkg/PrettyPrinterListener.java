@@ -2,7 +2,7 @@ package my.pkg;
 
 import org.antlr.v4.runtime.tree.TerminalNode;
 
-public class MyListener extends HelloPackageBaseListener {
+public class PrettyPrinterListener extends HelloPackageBaseListener {
     private int indentation = 0;
     private boolean newlineMatched = false;
 

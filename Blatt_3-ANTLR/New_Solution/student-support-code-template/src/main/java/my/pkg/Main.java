@@ -11,7 +11,6 @@ import java.nio.file.Path;
 
 public class Main {
   static void main(String... args) {
-
     String input = "";
 
     try {
@@ -31,7 +30,7 @@ public class Main {
     ParseTreeWalker walker = new ParseTreeWalker();
 
     // Traversal with listener
-    MyListener listener = new MyListener();
+    PrettyPrinterListener listener = new PrettyPrinterListener();
     System.out.println("Pretty printing with listeners");
     walker.walk(listener, tree);
 
@@ -39,7 +38,9 @@ public class Main {
     System.out.println("Pretty printing with visitor pattern");
 
     // Traversal with visitor Pattern
-    MyVisitor visitor = new MyVisitor();
-    visitor.visit(tree);
+    PrettyPrinterVisitor visitor = new PrettyPrinterVisitor();
+    String output = visitor.visit(tree);
+    System.out.println(output);
   }
 }
+

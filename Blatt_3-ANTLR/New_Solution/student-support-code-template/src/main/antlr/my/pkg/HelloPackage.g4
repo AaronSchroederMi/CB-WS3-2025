@@ -13,8 +13,8 @@ start
 // Assign(String(ID),expression(expr))
 
 stmt
-    : ID ':=' expr NEWLINE  #AssignStmt
-    | condition #conditionStmt
+    : ID ':=' expr NEWLINE # VDECLARATION
+    | condition # WHILEORIFSTATEMENT
     ;
 
 expr
@@ -23,18 +23,18 @@ expr
     ;
 
 condition
-        : 'while' expr 'do' NEWLINE stmt* 'end' NEWLINE #whileStmt
-        | 'if' expr 'do' NEWLINE stmt* (elsedo)? 'end' NEWLINE #ifStmt
+        : 'while' expr 'do' NEWLINE stmt* 'end' NEWLINE # WHILESTMT
+        | 'if' expr 'do' NEWLINE stmt* (elsedo)? 'end' NEWLINE # IFSTMT
         ;
 
 elsedo
-        : 'else' 'do' NEWLINE stmt*
+        : 'else do' NEWLINE stmt*
         ;
 
 arOp
-    : left=arOp ('*'|'/') right=arOp #MulDiv
-    | left=arOp ('+'|'-') right=arOp #PlusMin
-    | (NUM|ID) #NUM
+    : arOp ('*'|'/') arOp
+    | arOp ('+'|'-') arOp
+    | (NUM|ID)
     ;
 
 stringOp
@@ -42,8 +42,8 @@ stringOp
     ;
 
 compOp
-    : leftCompOp=compOp ('>''='?|'<''='?) compOp
-    | leftCompOp=compOp ('=='|'!=') compOp
+    : compOp ('>''='?|'<''='?) compOp
+    | compOp ('=='|'!=') compOp
     | value
     ;
 
